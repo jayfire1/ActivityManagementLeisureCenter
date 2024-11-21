@@ -1,13 +1,13 @@
 {
   "profiles": {
-    "Travail session (Package)": {
-      "commandName": "MsixPackage"
-    },
-    "Travail session (Unpackaged)": {
-      "commandName": "Project"
-    },
     "Profil 1": {
       "commandName": "MsixPackage"
+    },
+    "ActivityManagementLeisureCenter (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ActivityManagementLeisureCenter (Unpackaged)": {
+      "commandName": "Project"
     }
   }
 }
