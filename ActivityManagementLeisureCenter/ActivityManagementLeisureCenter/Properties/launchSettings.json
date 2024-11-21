@@ -5,6 +5,9 @@
     },
     "Travail session (Unpackaged)": {
       "commandName": "Project"
+    },
+    "Profil 1": {
+      "commandName": "MsixPackage"
     }
   }
 }

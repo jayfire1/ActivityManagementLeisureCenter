@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travail session", "Travail session\Travail session.csproj", "{36AF0A44-8365-41B4-81FE-5F7E2577B07F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivityManagementLeisureCenter", "ActivityManagementLeisureCenter\ActivityManagementLeisureCenter.csproj", "{36AF0A44-8365-41B4-81FE-5F7E2577B07F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
