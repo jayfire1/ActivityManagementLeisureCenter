@@ -26,11 +26,26 @@ namespace ActivityManagementLeisureCenter
         public MainWindow()
         {
             this.InitializeComponent();
+
+            mainFrame.Navigate(typeof(PageActivites));
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
+        private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            myButton.Content = "Clicked";
+            var item = args.SelectedItem as NavigationViewItem;
+
+            switch (item.Name)
+            {
+                case "iActivite":
+                    mainFrame.Navigate(typeof(PageActivites));
+                    break;
+                case "iConnexion":
+                    mainFrame.Navigate(typeof(PageConnexion));
+                    break;
+                default:
+                    break;
+            }
         }
+
     }
 }
