@@ -26,6 +26,20 @@ namespace ActivityManagementLeisureCenter
         public PageActivites()
         {
             this.InitializeComponent();
+            chargerActivites();
+        }
+
+        private void chargerActivites()
+        {
+            SingletonBD singletonBD = SingletonBD.getInstance();
+            singletonBD.chargerActivites();
+
+            ActivitesList.ItemsSource = singletonBD.getListeActivites();
+        }
+
+        private void OnInscrireClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

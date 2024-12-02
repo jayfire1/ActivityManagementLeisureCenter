@@ -9,6 +9,32 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <ScrollViewer>
-        <TextBlock Text="Page Activités" Margin="10"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <ItemsControl Name="ActivitesList">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapGrid Orientation="Horizontal" ItemWidth="275" ItemHeight="275" HorizontalAlignment="Center" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="local:Activites">
+                        <Border BorderBrush="Black" BorderThickness="1" Margin="10" Padding="10">
+                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="{Binding Image}" Width="100" Height="100" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Nom}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Type}" FontSize="14" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding PrixVenteFormatte}" FontSize="14" HorizontalAlignment="Center"/>
+                                <Button Content="S'inscrire" Margin="0 10 0 0" HorizontalAlignment="Center" Padding="10" Background="CornflowerBlue" Click="OnInscrireClick"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
     </ScrollViewer>
 </Page>

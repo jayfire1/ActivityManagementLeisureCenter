@@ -16,7 +16,7 @@ namespace ActivityManagementLeisureCenter
 
         public SingletonBD()
         {
-            con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2024_420335ri_gr1_2361208-jason-gauthier;Uid=2361208;Pwd=2361208;");
+            con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2024_420-345-ri_eq10;Uid=2361208;Pwd=2361208;");
             listeActivites = new ObservableCollection<Activites>();
         }
 
@@ -48,8 +48,9 @@ namespace ActivityManagementLeisureCenter
                 string type = reader.GetString("type");
                 decimal cout_organisation = reader.GetDecimal("cout_organisation");
                 decimal prix_vente = reader.GetDecimal("prix_vente");
+                string image = reader.GetString("image");
 
-                Activites activite = new Activites(nom, type, cout_organisation, prix_vente);
+                Activites activite = new Activites(nom, type, cout_organisation, prix_vente, image);
                 listeActivites.Add(activite);
             }
             reader.Close();
