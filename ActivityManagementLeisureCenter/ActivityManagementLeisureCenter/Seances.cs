@@ -35,5 +35,13 @@ namespace ActivityManagementLeisureCenter
         public int Nb_places { get => nb_places; set => nb_places = value; }
         public int Nb_personnes { get => nb_personnes; set => nb_personnes = value; }
         public int Id_activite { get => id_activite; set => id_activite = value; }
+
+        public string DateDebutFormat => Date_debut.ToString("yyyy-MM-dd");
+        public string DateFinFormat => Date_fin.ToString("yyyy-MM-dd");
+
+        public string DateAffichage => $"Du ­{DateDebutFormat} au {DateFinFormat}";
+        public string HeureAffichage => $"De {heure_debut} à {heure_fin}";
+        public string NbPlaceRestantes => $"Nombre de places restantes : {Nb_places - nb_personnes}";
+        public string NbPlacesTotal => $"Capacité : {nb_places}";
     }
 }

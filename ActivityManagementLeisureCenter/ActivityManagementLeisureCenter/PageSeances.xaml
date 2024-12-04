@@ -13,7 +13,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-
             <ItemsControl Name="SeancesList" ItemsSource="{Binding Seances}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -25,11 +24,11 @@
                     <DataTemplate x:DataType="local:Seances">
                         <Border BorderBrush="Black" BorderThickness="1" Margin="10" Padding="10">
                             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <TextBlock Text="{Binding Date_debut}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                <TextBlock Text="{Binding Heure_debut}" FontSize="14" HorizontalAlignment="Center"/>
-                                <TextBlock Text="{Binding Heure_fin}" FontSize="14" HorizontalAlignment="Center"/>
-                                <TextBlock Text="{Binding Nb_places}" FontSize="14" HorizontalAlignment="Center"/>
-                                <TextBlock Text="{Binding Nb_personnes}" FontSize="14" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding DateAffichage}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding HeureAffichage}" FontSize="14" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding NbPlacesTotal}" FontSize="14" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding NbPlaceRestantes}" FontSize="14" HorizontalAlignment="Center"/>
+                                <local:BoutonPersonnalise Content="Participer" Margin="0 10 0 0" HorizontalAlignment="Center" Padding="10" Background="CornflowerBlue" Click="OnParticiperClick"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>

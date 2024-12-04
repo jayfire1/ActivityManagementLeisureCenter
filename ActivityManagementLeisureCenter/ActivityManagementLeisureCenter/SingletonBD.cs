@@ -54,13 +54,14 @@ namespace ActivityManagementLeisureCenter
 
             while (reader.Read())
             {
+                int idActivite = reader.GetInt32("id_activite");
                 string nom = reader.GetString("nom");
                 string type = reader.GetString("type");
                 decimal cout_organisation = reader.GetDecimal("cout_organisation");
                 decimal prix_vente = reader.GetDecimal("prix_vente");
                 string image = reader.GetString("image");
 
-                Activites activite = new Activites(nom, type, cout_organisation, prix_vente, image);
+                Activites activite = new Activites(nom, type, cout_organisation, prix_vente, image, idActivite);
 
                 // Associer la moyenne si elle existe
                 if (moyennesNotes.ContainsKey(nom))

@@ -27,5 +27,53 @@ namespace ActivityManagementLeisureCenter
         {
             this.InitializeComponent();
         }
+
+        private async void SeConnecterAdherentButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new ContentDialog
+            {
+                Title = "Connexion Adhérent",
+                Content = new StackPanel
+                {
+                    Children =
+            {
+                new TextBlock { Text = "Veuillez entrer votre matricule" },
+                new TextBox { Name = "MatriculeTextBox", PlaceholderText = "Matricule" }
+            }
+                },
+                PrimaryButtonText = "Se connecter",
+                CloseButtonText = "Fermer"
+            };
+            dialog.XamlRoot = this.XamlRoot;
+            await dialog.ShowAsync();
+        }
+
+        private async void SeConnecterAdministrateurButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new ContentDialog
+            {
+                Title = "Connexion Administrateur",
+                Content = new StackPanel
+                {
+                    Children =
+            {
+                new TextBlock { Text = "Veuillez entrer votre nom d'utilisateur" },
+                new TextBox { Name = "UtilisateurTextBox", PlaceholderText = "Nom d'utilisateur" },
+                new TextBlock { Text = "" },
+                new TextBlock { Text = "Veuillez entrer votre mot de passe" },
+                new TextBox { Name = "MDPTextBox", PlaceholderText = "Mot de passe" }
+            }
+                },
+                PrimaryButtonText = "Se connecter",
+                CloseButtonText = "Fermer"
+            };
+            dialog.XamlRoot = this.XamlRoot;
+            await dialog.ShowAsync();
+        }
+
+        private void RevenirButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(PageActivites));
+        }
     }
 }

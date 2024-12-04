@@ -26,15 +26,24 @@ namespace ActivityManagementLeisureCenter
         public PageSeances()
         {
             this.InitializeComponent();
-            chargerSeances();
         }
 
-        private void chargerSeances()
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (e.Parameter is Activites activite)
+            {
+                ChargerSeancesParActivite(activite);
+            }
+        }
+
+        private void ChargerSeancesParActivite(Activites activite)
         {
             SingletonBD singletonBD = SingletonBD.getInstance();
-            singletonBD.ChargerSeancesParActivite();
+            singletonBD.ChargerSeancesParActivite(activite.IdActivite);
 
-            SeancesList.ItemsSource = singletonBD.getListeActivites();
+            SeancesList.ItemsSource = singletonBD.getListeSeances();
         }
 
         private void OnParticiperClick(object sender, RoutedEventArgs e)

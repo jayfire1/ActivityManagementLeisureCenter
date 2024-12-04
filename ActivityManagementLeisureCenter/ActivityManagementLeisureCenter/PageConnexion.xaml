@@ -3,12 +3,23 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ActivityManagementLeisureCenter"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <ScrollViewer>
-        <TextBlock Text="Page Connexion" Margin="10"/>
-    </ScrollViewer>
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Page Connexion" FontSize="36" FontWeight="Bold" Foreground="#4CAF50" HorizontalAlignment="Center" Grid.Row="0" Margin="10"/>
+
+        <Button Content="Adhérent" Click="SeConnecterAdherentButton_Click" Background="#F44336" Foreground="White" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Margin="0,10" Width="250"/>
+
+        <Button Content="Administrateur" Click="SeConnecterAdministrateurButton_Click" Background="#FF9800" Foreground="White" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Margin="0,10" Width="250"/>
+        
+        <Button Content="Revenir à la page des activités" Click="RevenirButton_Click" Background="#2196F3" Foreground="White" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Margin="0,10" Width="250"/>
+    </Grid>
+
 </Page>
