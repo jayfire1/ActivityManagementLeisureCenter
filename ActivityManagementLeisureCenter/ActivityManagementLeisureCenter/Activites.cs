@@ -30,6 +30,7 @@ namespace ActivityManagementLeisureCenter
         public decimal Cout_organisation { get => cout_organisation; set => cout_organisation = value; }
         public decimal Prix_vente { get => prix_vente; set => prix_vente = value; }
         public string Image { get => image; set => image = value; }
+        public double MoyenneNote { get; set; }
 
         public string PrixVenteFormatte => $"{Prix_vente:0.00} $";
     }

@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="ActivityManagementLeisureCenter.PageActivites"
+    x:Class="ActivityManagementLeisureCenter.PageSeances"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ActivityManagementLeisureCenter"
@@ -8,17 +8,13 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Page.Resources>
-        <SolidColorBrush x:Key="RatingControlForeground" Color="Gold"/>
-    </Page.Resources>
-    
     <ScrollViewer>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <ItemsControl Name="ActivitesList">
+            <ItemsControl Name="SeancesList" ItemsSource="{Binding Seances}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapGrid Orientation="Horizontal" ItemWidth="315" ItemHeight="315" HorizontalAlignment="Center" />
@@ -26,16 +22,14 @@
                 </ItemsControl.ItemsPanel>
 
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="local:Activites">
+                    <DataTemplate x:DataType="local:Seances">
                         <Border BorderBrush="Black" BorderThickness="1" Margin="10" Padding="10">
                             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <Image Source="{Binding Image}" Width="100" Height="100" HorizontalAlignment="Center"/>
-                                <TextBlock Text="{Binding Nom}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                <TextBlock Text="{Binding Type}" FontSize="14" HorizontalAlignment="Center"/>
-                                <TextBlock Text="{Binding MoyenneNote}" FontSize="14" Foreground="Gray" HorizontalAlignment="Center"/>
-                                <RatingControl Value="{Binding MoyenneNote}" IsReadOnly="True" MaxRating="5" Foreground="{StaticResource RatingControlForeground}" HorizontalAlignment="Center"/>
-                                <TextBlock Text="{Binding PrixVenteFormatte}" FontSize="14" HorizontalAlignment="Center"/>
-                                <local:BoutonPersonnalise Content="S'inscrire" Margin="0 10 0 0" HorizontalAlignment="Center" Padding="10" Background="CornflowerBlue" Click="OnInscrireClick"/>
+                                <TextBlock Text="{Binding Date_debut}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Heure_debut}" FontSize="14" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Heure_fin}" FontSize="14" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Nb_places}" FontSize="14" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Nb_personnes}" FontSize="14" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>

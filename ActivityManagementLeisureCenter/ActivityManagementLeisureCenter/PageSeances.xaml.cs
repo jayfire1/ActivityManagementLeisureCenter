@@ -7,7 +7,6 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,28 +21,25 @@ namespace ActivityManagementLeisureCenter
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PageActivites : Page
+    public sealed partial class PageSeances : Page
     {
-        public PageActivites()
+        public PageSeances()
         {
             this.InitializeComponent();
-            chargerActivites();
+            chargerSeances();
         }
 
-        private void chargerActivites()
+        private void chargerSeances()
         {
             SingletonBD singletonBD = SingletonBD.getInstance();
-            singletonBD.chargerActivites();
+            singletonBD.ChargerSeancesParActivite();
 
-            ActivitesList.ItemsSource = singletonBD.getListeActivites();
+            SeancesList.ItemsSource = singletonBD.getListeActivites();
         }
 
-        private void OnInscrireClick(object sender, RoutedEventArgs e)
+        private void OnParticiperClick(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
-            var activite = button.DataContext as Activites;
 
-            Frame.Navigate(typeof(PageSeances), activite);
         }
 
     }
