@@ -29,7 +29,7 @@
                                 <TextBlock Text="{Binding Nom}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
                                 <TextBlock Text="{Binding Type}" FontSize="14" HorizontalAlignment="Center"/>
                                 <TextBlock Text="{Binding PrixVenteFormatte}" FontSize="14" HorizontalAlignment="Center"/>
-                                <Button Content="S'inscrire" Margin="0 10 0 0" HorizontalAlignment="Center" Padding="10" Background="CornflowerBlue" Click="OnInscrireClick"/>
+                                <local:BoutonPersonnalise Content="S'inscrire" Margin="0 10 0 0" HorizontalAlignment="Center" Padding="10" Background="CornflowerBlue" Click="OnInscrireClick"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
