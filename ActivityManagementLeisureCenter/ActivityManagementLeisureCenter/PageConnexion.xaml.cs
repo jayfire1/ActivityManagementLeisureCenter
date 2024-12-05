@@ -30,6 +30,8 @@ namespace ActivityManagementLeisureCenter
 
         private async void SeConnecterAdherentButton_Click(object sender, RoutedEventArgs e)
         {
+            var matriculeTextBox = new TextBox { Name = "MatriculeTextBox", PlaceholderText = "Matricule" };
+
             var dialog = new ContentDialog
             {
                 Title = "Connexion Adhérent",
@@ -38,14 +40,42 @@ namespace ActivityManagementLeisureCenter
                     Children =
             {
                 new TextBlock { Text = "Veuillez entrer votre matricule" },
-                new TextBox { Name = "MatriculeTextBox", PlaceholderText = "Matricule" }
+                matriculeTextBox
             }
                 },
                 PrimaryButtonText = "Se connecter",
                 CloseButtonText = "Fermer"
             };
             dialog.XamlRoot = this.XamlRoot;
-            await dialog.ShowAsync();
+            ContentDialogResult result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                string matricule = matriculeTextBox.Text;
+
+                Adherents adherent = SingletonBD.getInstance().AuthentifierAdherent(matricule);
+
+                if (adherent != null)
+                {
+                    var successDialog = new ContentDialog
+                    {
+                        Title = "Connexion réussie",
+                        Content = new TextBlock { Text = $"Bienvenue {adherent.Prenom} {adherent.Nom}" },
+                        PrimaryButtonText = "OK"
+                    };
+                    await successDialog.ShowAsync();
+                }
+                else
+                {
+                    var errorDialog = new ContentDialog
+                    {
+                        Title = "Erreur",
+                        Content = new TextBlock { Text = "Matricule incorrect. Veuillez réessayer." },
+                        PrimaryButtonText = "OK"
+                    };
+                    await errorDialog.ShowAsync();
+                }
+            }
         }
 
         private async void SeConnecterAdministrateurButton_Click(object sender, RoutedEventArgs e)

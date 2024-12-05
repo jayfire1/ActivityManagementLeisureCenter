@@ -3,34 +3,37 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ActivityManagementLeisureCenter"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <ScrollViewer>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
             <ItemsControl Name="SeancesList" ItemsSource="{Binding Seances}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapGrid Orientation="Horizontal" ItemWidth="315" ItemHeight="315" HorizontalAlignment="Center" />
+                        <WrapGrid Orientation="Horizontal" ItemWidth="350" ItemHeight="250" HorizontalAlignment="Center" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="local:Seances">
-                        <Border BorderBrush="Black" BorderThickness="1" Margin="10" Padding="10">
-                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <TextBlock Text="{Binding DateAffichage}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                <TextBlock Text="{Binding HeureAffichage}" FontSize="14" HorizontalAlignment="Center"/>
-                                <TextBlock Text="{Binding NbPlacesTotal}" FontSize="14" HorizontalAlignment="Center"/>
-                                <TextBlock Text="{Binding NbPlaceRestantes}" FontSize="14" HorizontalAlignment="Center"/>
-                                <local:BoutonPersonnalise Content="Participer" Margin="0 10 0 0" HorizontalAlignment="Center" Padding="10" Background="CornflowerBlue" Click="OnParticiperClick"/>
-                            </StackPanel>
-                        </Border>
+                        <Grid Margin="10">
+                            <Rectangle Fill="#D3D3D3" RadiusX="8" RadiusY="8" Margin="4,8,4,0" />
+
+                            <Border Background="White" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="8" Padding="15">
+                                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="10">
+                                    <TextBlock Text="{Binding DateAffichage}" FontSize="20" FontWeight="Bold" Foreground="#4CAF50" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding HeureAffichage}" FontSize="16" FontStyle="Italic" Foreground="Gray" HorizontalAlignment="Center"/>
+
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding NbPlaceRestantes}" FontSize="16" FontWeight="Bold" Foreground="Red" Margin="5,0,0,0"/>
+                                    </StackPanel>
+
+                                    <TextBlock Text="{Binding NbPlacesTotal}" FontSize="16" FontWeight="Medium" HorizontalAlignment="Center" Foreground="#FF9800"/>
+
+                                    <local:BoutonPersonnalise Content="Participer" Margin="0,20,0,0" HorizontalAlignment="Center" Padding="10" Background="#4CAF50" Foreground="White" CornerRadius="8" Width="150" Click="OnParticiperClick"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

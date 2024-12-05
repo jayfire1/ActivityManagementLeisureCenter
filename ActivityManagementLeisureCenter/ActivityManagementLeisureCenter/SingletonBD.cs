@@ -102,6 +102,7 @@ namespace ActivityManagementLeisureCenter
             con.Close();
         }
 
+        // Méthode pour aller chercher la moyenne des notes pour l'activité choisit
         public Dictionary<string, double> ChargerMoyenneNotesParActivite()
             {
                 var moyennes = new Dictionary<string, double>();
@@ -124,6 +125,35 @@ namespace ActivityManagementLeisureCenter
 
                 return moyennes;
             }
+
+        // Méthode pour aller chercher les informations de l'adhérent qui se connecte
+        public Adherents AuthentifierAdherent(string idNum)
+        {
+            Adherents adherent = null;
+
+            string requete = "SELECT * FROM adherent WHERE id_num = @idNum";
+            con.Open();
+            MySqlCommand commande = new MySqlCommand(requete, con);
+            commande.Parameters.AddWithValue("@idNum", idNum);
+
+            MySqlDataReader reader = commande.ExecuteReader();
+
+            if (reader.Read())
+            {
+                string nom = reader.GetString("nom");
+                string prenom = reader.GetString("prenom");
+                string adresse = reader.GetString("adresse");
+                DateTime dateNaissance = reader.GetDateTime("date_naissance");
+                int age = reader.GetInt32("age");
+
+                adherent = new Adherents(idNum, nom, prenom, adresse, dateNaissance, age);
+            }
+
+            reader.Close();
+            con.Close();
+
+            return adherent;
+        }
 
 
 
