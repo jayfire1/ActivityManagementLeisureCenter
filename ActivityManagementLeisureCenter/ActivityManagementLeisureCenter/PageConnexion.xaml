@@ -15,11 +15,11 @@
 
         <TextBlock Text="Page Connexion" FontSize="36" FontWeight="Bold" Foreground="#4CAF50" HorizontalAlignment="Center" Grid.Row="0" Margin="10"/>
 
-        <Button Content="Adhérent" Click="SeConnecterAdherentButton_Click" Background="#F44336" Foreground="White" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Margin="0,10" Width="250"/>
+        <local:BoutonPersonnalise CornerRadius="8" Content="Adhérent" Click="SeConnecterAdherentButton_Click" Background="#F44336" Foreground="White" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Margin="0,10" Width="250"/>
 
-        <Button Content="Administrateur" Click="SeConnecterAdministrateurButton_Click" Background="#FF9800" Foreground="White" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Margin="0,10" Width="250"/>
-        
-        <Button Content="Revenir à la page des activités" Click="RevenirButton_Click" Background="#2196F3" Foreground="White" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Margin="0,10" Width="250"/>
+        <local:BoutonPersonnalise CornerRadius="8" Content="Administrateur" Click="SeConnecterAdministrateurButton_Click" Background="#FF9800" Foreground="White" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Margin="0,10" Width="250"/>
+
+        <local:BoutonPersonnalise CornerRadius="8" Content="Revenir à la page des activités" Click="RevenirButton_Click" Background="#2196F3" Foreground="White" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Margin="0,10" Width="250"/>
     </Grid>
 
 </Page>

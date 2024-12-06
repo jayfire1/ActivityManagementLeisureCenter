@@ -13,8 +13,11 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="PageActivites.xaml" />
+    <None Remove="PageAdmin.xaml" />
     <None Remove="PageConnexion.xaml" />
+    <None Remove="PageExportation.xaml" />
     <None Remove="PageSeances.xaml" />
+    <None Remove="PageStatistiques.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +44,21 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="PageExportation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="PageStatistiques.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="PageAdmin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="PageSeances.xaml">

@@ -10,6 +10,9 @@
     <NavigationView PaneDisplayMode="Top" PaneTitle="Activités d'un centre de loisirs" x:Name="navView" IsBackButtonVisible="Collapsed" IsSettingsVisible="false" SelectionChanged="navView_SelectionChanged">
         <NavigationView.MenuItems>
             <NavigationViewItem Content="Activités" x:Name="iActivite" Icon="Emoji2"/>
+            <NavigationViewItem Content="Administrateur" x:Name="iAdmin" Icon="Admin" Visibility="Collapsed"/>
+            <NavigationViewItem Content="Statistiques" x:Name="iStats" Icon="Document" Visibility="Collapsed"/>
+            <NavigationViewItem Content="Exportation des données" x:Name="iExportation" Icon="Copy" Visibility="Collapsed"/>
         </NavigationView.MenuItems>
         <NavigationView.FooterMenuItems>
             <NavigationViewItem Content="Connexion" x:Name="iConnexion" Icon="Contact"  Visibility="Visible"/>

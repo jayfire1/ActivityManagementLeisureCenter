@@ -26,6 +26,7 @@ namespace ActivityManagementLeisureCenter
     /// </summary>
     public partial class App : Application
     {
+        public static MainWindow MainWindowInstance { get; private set; }
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -42,8 +43,8 @@ namespace ActivityManagementLeisureCenter
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            m_window = new MainWindow();
-            m_window.Activate();
+            MainWindowInstance = new MainWindow();
+            MainWindowInstance.Activate();
         }
 
         private Window m_window;

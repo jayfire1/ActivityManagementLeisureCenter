@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Google.Protobuf.WellKnownTypes;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -155,7 +156,37 @@ namespace ActivityManagementLeisureCenter
             return adherent;
         }
 
+        // Méthode pour aller chercher les informations de l'administrateur qui se connecte
+        public Administrateur AuthentifierAdministrateur(string nom_utilisateur, string mdp)
+        {
+            Administrateur administrateur = null;
+
+            string requete = "SELECT * FROM administrateur WHERE nom_utilisateur = @nom_utilisateur AND mdp = @mdp";
+            con.Open();
+            MySqlCommand commande = new MySqlCommand(requete, con);
+            commande.Parameters.AddWithValue("@nom_utilisateur", nom_utilisateur);
+
+            string mdpHache = Administrateur.HashPassword(mdp);
+            commande.Parameters.AddWithValue("@mdp", mdpHache);
+
+            MySqlDataReader reader = commande.ExecuteReader();
+
+            if (reader.Read())
+            {
+                string nom_utilisateurDb = reader.GetString("nom_utilisateur");
+                string mdpDb = reader.GetString("mdp");
+
+                administrateur = new Administrateur(nom_utilisateurDb, mdpDb);
+            }
+
+            reader.Close();
+            con.Close();
+
+            return administrateur;
+        }
+
 
 
     }
+
 }
