@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <SolidColorBrush x:Key="RatingControlForeground" Color="Gold"/>
+        <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="Gold"/>
     </Page.Resources>
     
     <ScrollViewer>
@@ -32,9 +32,9 @@
                                 <Image Source="{Binding Image}" Width="100" Height="100" HorizontalAlignment="Center"/>
                                 <TextBlock Text="{Binding Nom}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
                                 <TextBlock Text="{Binding Type}" FontSize="14" HorizontalAlignment="Center"/>
-                                <RatingControl Value="{Binding MoyenneNote}" IsReadOnly="True" MaxRating="5" Foreground="{StaticResource RatingControlForeground}" HorizontalAlignment="Center"/>
+                                <RatingControl Value="{Binding MoyenneNote}" IsReadOnly="True" MaxRating="5" Foreground="{StaticResource RatingControlSelectedForeground}" HorizontalAlignment="Center"/>
                                 <TextBlock Text="{Binding PrixVenteFormatte}" FontSize="14" HorizontalAlignment="Center"/>
-                                <local:BoutonPersonnalise Content="S'inscrire" Margin="0 10 0 0" CornerRadius="8" HorizontalAlignment="Center" Padding="10" Background="CornflowerBlue" Click="OnInscrireClick"/>
+                                <local:BoutonPersonnalise Content="S'inscrire" Margin="0 10 0 0" CornerRadius="8" HorizontalAlignment="Center" Padding="10" Background="CornflowerBlue" Foreground="White" Click="OnInscrireClick"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>

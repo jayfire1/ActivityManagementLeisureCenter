@@ -26,6 +26,7 @@ namespace ActivityManagementLeisureCenter
         public MainWindow()
         {
             this.InitializeComponent();
+            HelperClass.mainWindow = this;
 
             mainFrame.Navigate(typeof(PageActivites));
 

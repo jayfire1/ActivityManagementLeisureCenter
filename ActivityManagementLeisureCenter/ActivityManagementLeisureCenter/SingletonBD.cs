@@ -15,6 +15,7 @@ namespace ActivityManagementLeisureCenter
         private MySqlConnection con;
         private ObservableCollection<Activites> listeActivites;
         private ObservableCollection<Seances> listeSeances;
+        private ObservableCollection<Adherents> listeAdherents;
         private static SingletonBD instance = null;
 
         public SingletonBD()
@@ -22,6 +23,7 @@ namespace ActivityManagementLeisureCenter
             con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2024_420-345-ri_eq10;Uid=2361208;Pwd=2361208;");
             listeActivites = new ObservableCollection<Activites>();
             listeSeances = new ObservableCollection<Seances>();
+            listeAdherents = new ObservableCollection<Adherents>();
         }
 
         public static SingletonBD getInstance()
@@ -40,6 +42,11 @@ namespace ActivityManagementLeisureCenter
         public ObservableCollection<Seances> getListeSeances()
         {
             return listeSeances;
+        }
+
+        public ObservableCollection<Adherents> getListeAdherents()
+        {
+            return listeAdherents;
         }
 
         // Méthode pour aller chercher toutes les activitées
@@ -185,7 +192,31 @@ namespace ActivityManagementLeisureCenter
             return administrateur;
         }
 
+        // Méthode pour aller chercher tout les adherents
+        public void chargerAdherents()
+        {
+            listeAdherents.Clear();
 
+            string requete = "SELECT * FROM adherent";
+            con.Open();
+            MySqlCommand commande = new MySqlCommand(requete, con);
+            MySqlDataReader reader = commande.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string id_num = reader.GetString("id_num");
+                string nom = reader.GetString("nom");
+                string prenom = reader.GetString("prenom");
+                string adresse = reader.GetString("adresse");
+                DateTime date_naissance = reader.GetDateTime("date_naissance");
+                int age = reader.GetInt32("age");
+
+                Adherents adherent = new Adherents(id_num, nom, prenom, adresse, date_naissance, age);
+                listeAdherents.Add(adherent);
+            }
+            reader.Close();
+            con.Close();
+        }
 
     }
 
