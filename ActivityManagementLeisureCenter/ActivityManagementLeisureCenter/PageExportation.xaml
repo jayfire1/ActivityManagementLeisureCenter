@@ -27,6 +27,22 @@
 
         <TextBlock Name="SuccessMessage" Text="" Foreground="Green" HorizontalAlignment="Center" Grid.Row="3" Margin="0,20,0,0" FontSize="16"/>
         <TextBlock Name="ErrorMessage" Text="" Foreground="Red" HorizontalAlignment="Center" Grid.Row="4" Margin="0,20,0,0" FontSize="16"/>
+
+        <ListView x:Name="adherentsListView">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:Adherents">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Nom}" />
+                        <TextBlock Text="{Binding Prenom}" />
+                        <TextBlock Text="{Binding Adresse}" />
+                        <TextBlock Text="{Binding Date_naissance}" />
+                        <TextBlock Text="{Binding Age}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
+
 
 </Page>

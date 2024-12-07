@@ -13,6 +13,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.Pickers;
+using Windows.Storage;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -39,22 +41,55 @@ namespace ActivityManagementLeisureCenter
             picker.SuggestedFileName = "Liste_Adherents";
             picker.FileTypeChoices.Add("Fichier texte", new List<string>() { ".csv" });
 
-            //crée le fichier
+            // Crée le fichier
             Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
+
+            // Réinitialise les messages de succès et d'erreur avant de commencer
+            SuccessMessage.Text = "";
+            ErrorMessage.Text = "";
 
             if (monFichier != null)
             {
-                ObservableCollection<Adherents> adherents = SingletonBD.getInstance().getListeAdherents();
+                ObservableCollection<Adherents> adherentsList = SingletonBD.getInstance().getListeAdherents();
 
-                List<string> lignes = adherents.Select(a => $"{a.Id_num};{a.Nom};{a.Prenom};{a.Adresse};{a.Date_naissance};{a.Age}").ToList();
-                await Windows.Storage.FileIO.WriteLinesAsync(monFichier, lignes, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+                // Vérifiez si la liste est vide ou nulle
+                if (adherentsList == null || adherentsList.Count == 0)
+                {
+                    ErrorMessage.Text = "Aucun adhérent trouvé.";
+                    return;
+                }
+
+                // Préparer les lignes à écrire dans le fichier CSV
+                List<string> lignes = new List<string> { "Id_num;Nom;Prenom;Adresse;Date_naissance;Age" };
+
+                // Boucle pour ajouter les données des adhérents
+                foreach (var adherent in adherentsList)
+                {
+                    lignes.Add($"{adherent.Id_num};{adherent.Nom};{adherent.Prenom};{adherent.Adresse};{adherent.Date_naissance:yyyy-MM-dd};{adherent.Age}");
+                }
+
+                // Écriture des lignes dans le fichier CSV
+                try
+                {
+                    await Windows.Storage.FileIO.WriteLinesAsync(monFichier, lignes, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+                    SuccessMessage.Text = "Exportation réussie !";
+                }
+                catch (Exception ex)
+                {
+                    ErrorMessage.Text = $"Erreur lors de l'exportation : {ex.Message}";
+                }
+            }
+            else
+            {
+                ErrorMessage.Text = "Aucun fichier sélectionné.";
             }
         }
 
-            private void ExporterActivitesClick(object sender, RoutedEventArgs e)
-            {
 
-            }
+        private void ExporterActivitesClick(object sender, RoutedEventArgs e)
+        {
+
+        }
 
     }
 }
