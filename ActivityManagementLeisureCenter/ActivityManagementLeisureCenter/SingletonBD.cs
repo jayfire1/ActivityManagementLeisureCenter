@@ -217,6 +217,130 @@ namespace ActivityManagementLeisureCenter
 
             return administrateur;
         }
+        
+        // Méthode pour obtenir le nombre total d'adhérents
+        public int getTotalAdherents()
+        {
+            int totalAdherents = 0;
+            string requete = "SELECT COUNT(*) FROM adherent";
+
+            con.Open();
+            MySqlCommand commande = new MySqlCommand(requete, con);
+            totalAdherents = Convert.ToInt32(commande.ExecuteScalar());
+            con.Close();
+
+            return totalAdherents;
+        }
+
+        // Méthode pour obtenir le nombre total d'activités 
+        public int getTotalActivites()
+        {
+            int totalActivites = 0;
+            string requete = "SELECT COUNT(*) FROM activite";
+
+            con.Open();
+            MySqlCommand commande = new MySqlCommand(requete, con);
+            totalActivites = Convert.ToInt32(commande.ExecuteScalar());
+            con.Close();
+
+            return totalActivites;
+        }
+
+        // Méthode pour obtenir le nombre d'adhérents pour chaque activité
+        public Dictionary<string, int> chargerParticipantsParActivite()
+        {
+            var participantsParActivite = new Dictionary<string, int>();
+
+            string requete = "SELECT nom_activite, nb_participants FROM participants_par_activite";
+
+            con.Open();
+            MySqlCommand commande = new MySqlCommand(requete, con);
+            MySqlDataReader reader = commande.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string nomActivite = reader.GetString("nom_activite");
+                int nbParticipants = reader.GetInt32("nb_participants");
+
+                participantsParActivite[nomActivite] = nbParticipants;
+            }
+            reader.Close();
+            con.Close();
+
+            return participantsParActivite;
+        }
+
+        // Méthode pour obtenir le participant qui participe au plus grand nombre de séances
+        public Dictionary<string, string> ChargerParticipantAvecPlusDeSeances()
+        {
+            var participants = new Dictionary<string, string>(); 
+            
+            string requete = "SELECT * FROM participant_avec_plus_seance";
+
+            con.Open();
+            MySqlCommand commande = new MySqlCommand(requete, con);
+            MySqlDataReader reader = commande.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string nom = reader.GetString("nom");
+                string prenom = reader.GetString("prenom");
+                int nbSeances = reader.GetInt32("nb_seances");
+
+                participants[$"{prenom} {nom}"] = $"{nbSeances} séances";
+            }
+            reader.Close();
+            con.Close();
+
+            return participants;
+        }
+
+        // Méthode pour obtenir le prix moyen que chaque participant rapporte ($)
+        public Dictionary<string, double> ChargerPrixMoyenParParticipant()
+        {
+            var prixMoyens = new Dictionary<string, double>();
+
+            string requete = "SELECT nom, prenom, prix_moyen FROM prix_moyen_par_participant";
+
+            con.Open();
+            MySqlCommand commande = new MySqlCommand(requete, con);
+            MySqlDataReader reader = commande.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string participant = reader.GetString("prenom") + " " + reader.GetString("nom");
+                double prixMoyen = reader.GetDouble("prix_moyen");
+                prixMoyens[participant] = prixMoyen;
+            }
+            reader.Close();
+            con.Close();
+
+            return prixMoyens;
+        }
+
+        // Méthode pour obtenir le nombre de participant moyen par mois
+        public Dictionary<string, double> ChargerParticipantsMoyenParMois()
+        {
+            var participantsMoyens = new Dictionary<string, double>();
+
+            string requete = "SELECT * FROM participants_moyen_par_mois";
+
+            con.Open();
+            MySqlCommand commande = new MySqlCommand(requete, con);
+            MySqlDataReader reader = commande.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string moisAnnee = $"{reader.GetInt32("mois")}/{reader.GetInt32("annee")}";
+                double participantsMoyensParMois = reader.GetDouble("participants_moyens");
+
+                participantsMoyens[moisAnnee] = participantsMoyensParMois;
+            }
+            reader.Close();
+            con.Close();
+
+            return participantsMoyens;
+        }
 
     }
 

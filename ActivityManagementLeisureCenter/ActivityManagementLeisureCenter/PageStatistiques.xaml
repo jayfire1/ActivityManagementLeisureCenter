@@ -8,7 +8,28 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock Text="Page Statistiques"/>
-    </Grid>
+    <Page.Resources>
+        <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="Gold"/>
+    </Page.Resources>
+
+    <ScrollViewer>
+        <Grid Padding="20">
+            <StackPanel Spacing="20">
+                <TextBlock Text="Statistiques" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+
+                <TextBlock x:Name="TotalAdherentsText" FontSize="18"/>
+                <TextBlock x:Name="TotalActivitesText" FontSize="18"/>
+                <TextBlock x:Name="TopParticipantText" FontSize="18"/>
+
+                <TextBlock Text="Participants par activité et la moyenne des notes :" FontSize="18" FontWeight="Bold" Margin="0,20,0,10" />
+                <ListView x:Name="ParticipantsParActiviteList"/>
+
+                <TextBlock Text="Prix moyen par adhérents :" FontSize="18" FontWeight="Bold" Margin="0,20,0,10"/>
+                <ListView x:Name="PrixMoyenList"/>
+
+                <TextBlock Text="Participants moyen par mois :" FontSize="18" FontWeight="Bold" Margin="0,20,0,10"/>
+                <ListView x:Name="ParticipantsMoyenList"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Page>
