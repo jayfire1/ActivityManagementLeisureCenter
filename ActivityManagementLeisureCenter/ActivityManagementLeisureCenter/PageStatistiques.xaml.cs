@@ -39,10 +39,13 @@ namespace ActivityManagementLeisureCenter
             int totalActivites = BD.getTotalActivites();
             TotalActivitesText.Text = $"Nombre total d'activités : {totalActivites}";
 
+            
+
             Dictionary<string, int> participantsParActivite = BD.chargerParticipantsParActivite();
             Dictionary<string, double> moyennesParActivite = BD.ChargerMoyenneNotesParActivite();
             Dictionary<string, double> prixMoyensParParticipant = BD.ChargerPrixMoyenParParticipant();
             Dictionary<string, double> participantsMoyensParMois = BD.ChargerParticipantsMoyenParMois();
+            Dictionary<string, string> participantAvecPlusDeSeances = BD.ChargerParticipantAvecPlusDeSeances();
 
             foreach (var activite in participantsParActivite)
             {
@@ -98,6 +101,16 @@ namespace ActivityManagementLeisureCenter
                 stackPanel.Children.Add(textBlock);
 
                 ParticipantsMoyenList.Items.Add(stackPanel);
+            }
+
+            if (participantAvecPlusDeSeances.Count > 0)
+            {
+                var topParticipant = participantAvecPlusDeSeances.First();
+                TopParticipantText.Text = $"Participant avec le plus grand nombre de séances : {topParticipant.Key} ({topParticipant.Value})";
+            }
+            else
+            {
+                TopParticipantText.Text = "Participant avec le plus grand nombre de séances : Aucun participant trouvé.";
             }
         }
 

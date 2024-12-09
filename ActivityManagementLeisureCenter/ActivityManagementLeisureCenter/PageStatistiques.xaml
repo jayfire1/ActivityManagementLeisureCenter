@@ -15,7 +15,10 @@
     <ScrollViewer>
         <Grid Padding="20">
             <StackPanel Spacing="20">
-                <TextBlock Text="Statistiques" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+                <StackPanel Spacing="5">
+                    <TextBlock Text="Statistiques" FontSize="24" FontWeight="Bold" Margin="0,0,0,0"/>
+                    <Rectangle Height="2" Fill="Black" HorizontalAlignment="Stretch"/>
+                </StackPanel>
 
                 <TextBlock x:Name="TotalAdherentsText" FontSize="18"/>
                 <TextBlock x:Name="TotalActivitesText" FontSize="18"/>
