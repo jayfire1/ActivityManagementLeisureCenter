@@ -1,0 +1,56 @@
+<Page
+    x:Class="ActivityManagementLeisureCenter.PageAdminAdherents"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ActivityManagementLeisureCenter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Text="Admin - Adhérents" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,0,0" FontSize="20" Grid.Row="0"/>
+            <local:BoutonPersonnalise HorizontalAlignment="Center" Content="Ajouter" Click="AjouterAdherent_Click" Margin="0, 70, 0, 0" Width="300" Background="CornflowerBlue" Foreground="White"/>
+
+            <ListView x:Name="lvAdherents" Grid.Row="1" Margin="0,20,0,0" FontSize="20" HorizontalAlignment="Center">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="16" Margin="10" VerticalAlignment="Center">
+                                <Run Text="{Binding Id_num}" />
+                                <Run Text=" |" />
+                            </TextBlock>
+                            <TextBlock FontSize="16" VerticalAlignment="Center">
+                                <Run Text="{Binding Prenom}" />
+                            </TextBlock>
+                            <TextBlock FontSize="16" Margin="5" VerticalAlignment="Center">
+                                <Run Text="{Binding Nom}" />
+                                <Run Text=" - " />
+                            </TextBlock>
+                            <TextBlock FontSize="16" Margin="5, 0, 0, 0" VerticalAlignment="Center">
+                                <Run Text="{Binding Adresse}" />
+                                <Run Text=" - " />
+                            </TextBlock>
+                            <TextBlock FontSize="16" Margin="10" VerticalAlignment="Center">
+                                <Run Text="{Binding Date_naissance_Formatee}" />
+                                <Run Text=" - " />
+                            </TextBlock>
+                            <TextBlock FontSize="16" Margin="0, 0, 15, 0" VerticalAlignment="Center">
+                                <Run Text="{Binding Age}" />
+                                <Run Text="ans" />
+                            </TextBlock>
+                            <local:BoutonPersonnalise Content="Modifier" Click="ModifierAdherent_Click" Margin="0, 0, 15, 0" Background="CornflowerBlue" Foreground="White"/>
+                            <local:BoutonPersonnalise Content="Supprimer" Click="SupprimerAdherent_Click" Tag="{Binding Id_num}" Background="#F44336" Foreground="White"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ScrollViewer>
+</Page>

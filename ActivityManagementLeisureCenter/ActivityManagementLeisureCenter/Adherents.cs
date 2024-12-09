@@ -33,5 +33,14 @@ namespace ActivityManagementLeisureCenter
         public string Adresse { get => adresse; set => adresse = value; }
         public DateTime Date_naissance { get => date_naissance; set => date_naissance = value; }
         public int Age { get => age; set => age = value; }
+
+        public string Date_naissance_Formatee 
+        {
+            get
+            {
+                return Date_naissance.ToString("dd/MM/yyyy");
+            }
+        }
+
     }
 }

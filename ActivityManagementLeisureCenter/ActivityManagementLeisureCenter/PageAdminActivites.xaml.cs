@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -21,32 +21,11 @@ namespace ActivityManagementLeisureCenter
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PageAdmin : Page
+    public sealed partial class PageAdminActivites : Page
     {
-        public PageAdmin()
+        public PageAdminActivites()
         {
             this.InitializeComponent();
         }
-
-        private void AdherentsButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(PageAdminAdherents));
-        }
-
-        private void ActivitesButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(PageAdminActivites));
-        }
-
-        private void SeancesButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(PageAdminSeances));
-        }
-
-        private void RevenirButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(PageActivites));
-        }
-
     }
 }
