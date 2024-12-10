@@ -26,6 +26,85 @@ namespace ActivityManagementLeisureCenter
         public PageAdminActivites()
         {
             this.InitializeComponent();
+            chargerActivites();
         }
+
+        private void chargerActivites()
+        {
+            lvActivites.ItemsSource = SingletonBD.getInstance().getListeActivitesAdmin();
+        }
+
+        private async void SupprimerActivite_Click(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            int idActivite = (int)button.Tag;
+
+            var dialog = new ContentDialog
+            {
+                Title = "Confirmation de suppression",
+                Content = new TextBlock { Text = "Êtes-vous sûr de vouloir supprimer cette activité ?" },
+                PrimaryButtonText = "Oui",
+                CloseButtonText = "Non"
+            };
+
+            dialog.XamlRoot = this.XamlRoot;
+
+            ContentDialogResult result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                try
+                {
+                    var success = SingletonBD.getInstance().SupprimerActivite(idActivite);
+
+                    if (success)
+                    {
+                        var successDialog = new ContentDialog
+                        {
+                            Title = "Suppression réussie",
+                            Content = new TextBlock { Text = "L'activité a été supprimée avec succès." },
+                            PrimaryButtonText = "OK"
+                        };
+                        successDialog.XamlRoot = this.XamlRoot;
+                        await successDialog.ShowAsync();
+
+                        chargerActivites();
+                    }
+                    else
+                    {
+                        var errorDialog = new ContentDialog
+                        {
+                            Title = "Erreur",
+                            Content = new TextBlock { Text = "Une erreur est survenue lors de la suppression de l'activité." },
+                            PrimaryButtonText = "OK"
+                        };
+                        errorDialog.XamlRoot = this.XamlRoot;
+                        await errorDialog.ShowAsync();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var exceptionDialog = new ContentDialog
+                    {
+                        Title = "Erreur inattendue",
+                        Content = new TextBlock { Text = $"Une erreur est survenue : {ex.Message}" },
+                        PrimaryButtonText = "OK"
+                    };
+                    exceptionDialog.XamlRoot = this.XamlRoot;
+                    await exceptionDialog.ShowAsync();
+                }
+            }
+        }
+
+        private void ModifierActivite_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AjouterActivite_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

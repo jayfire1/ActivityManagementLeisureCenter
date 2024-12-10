@@ -108,6 +108,37 @@ namespace ActivityManagementLeisureCenter
             return adherentsList;
         }
 
+        // Méthode pour aller chercher tout les adherents
+        public ObservableCollection<Activites> getListeActivitesAdmin()
+        {
+            ObservableCollection<Activites> activitesList = new ObservableCollection<Activites>();
+
+            con.Open();
+
+            string query = "SELECT Nom, Type, Cout_organisation, Prix_vente, Image, id_activite FROM activite";
+            MySqlCommand command = new MySqlCommand(query, con);
+
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Activites activite = new Activites(
+                        reader.GetString("Nom"),
+                        reader.GetString("Type"),
+                        reader.GetDecimal("Cout_organisation"),
+                        reader.GetDecimal("Prix_vente"),
+                        reader.GetString("Image"),
+                        reader.GetInt32("id_activite")
+                    );
+                    activitesList.Add(activite);
+                }
+                reader.Close();
+            }
+            con.Close();
+
+            return activitesList;
+        }
+
         // Méthode pour aller chercher toutes les séances correspondantes à l'activité choisit
         public void ChargerSeancesParActivite(int idActivite)
         {
@@ -362,6 +393,24 @@ namespace ActivityManagementLeisureCenter
             }
         }
 
-    }
+        public bool SupprimerActivite(int idActivite)
+        {
+            try
+            {
+                string requete = "CALL supprimer_activite(@idActivite)";
+                con.Open();
+                MySqlCommand commande = new MySqlCommand(requete, con);
+                commande.Parameters.AddWithValue("@idActivite", idActivite);
+                commande.ExecuteNonQuery();
+                con.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                con.Close();
+                return false;
+            }
+        }
 
+    }
 }

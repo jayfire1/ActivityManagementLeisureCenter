@@ -8,7 +8,47 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock Text="Admin - Activités" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,0,0" FontSize="20" />
-    </Grid>
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Admin - Activités" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,0,0" FontSize="20" Grid.Row="0"/>
+            <local:BoutonPersonnalise HorizontalAlignment="Center" Content="Ajouter" Click="AjouterActivite_Click" Margin="0, 70, 0, 0" Width="300" Background="CornflowerBlue" Foreground="White"/>
+
+            <ListView x:Name="lvActivites" Grid.Row="1" Margin="0,20,0,0" FontSize="20" HorizontalAlignment="Center">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="16" Margin="10" VerticalAlignment="Center">
+                                <Run Text="{Binding IdActivite}" />
+                                <Run Text=" |" />
+                            </TextBlock>
+                            <TextBlock FontSize="16" VerticalAlignment="Center">
+                                <Run Text="{Binding Nom}" />
+                                <Run Text=" - " />
+                            </TextBlock>
+                            <TextBlock FontSize="16" Margin="5" VerticalAlignment="Center">
+                                <Run Text="{Binding Type}" />
+                                <Run Text=" - " />
+                            </TextBlock>
+                            <TextBlock FontSize="16" Margin="5, 0, 0, 0" VerticalAlignment="Center">
+                                <Run Text="{Binding Cout_organisation}" />
+                                <Run Text="$  - " />
+                            </TextBlock>
+                            <TextBlock FontSize="16" Margin="10" VerticalAlignment="Center">
+                                <Run Text="{Binding Prix_vente}" />
+                                <Run Text="$  - " />
+                            </TextBlock>
+                            <Image Source="{Binding Image}" Width="50" Height="50" Margin="10"/>
+                            <local:BoutonPersonnalise Content="Modifier" Click="ModifierActivite_Click" Margin="0, 0, 15, 0" Background="CornflowerBlue" Foreground="White"/>
+                            <local:BoutonPersonnalise Content="Supprimer" Click="SupprimerActivite_Click" Tag="{Binding IdActivite}" Background="#F44336" Foreground="White"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ScrollViewer>
 </Page>
