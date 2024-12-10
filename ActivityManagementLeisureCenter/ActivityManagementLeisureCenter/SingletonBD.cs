@@ -342,6 +342,26 @@ namespace ActivityManagementLeisureCenter
             return participantsMoyens;
         }
 
+        // Méthode pour supprimer un adhérent
+        public bool SupprimerAdherent(string idAdherent)
+        {
+            try
+            {
+                string requete = "CALL supprimerAdherent(@idAdherent)";
+                con.Open();
+                MySqlCommand commande = new MySqlCommand(requete, con);
+                commande.Parameters.AddWithValue("@idAdherent", idAdherent);
+                commande.ExecuteNonQuery();
+                con.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                con.Close();
+                return false;
+            }
+        }
+
     }
 
 }

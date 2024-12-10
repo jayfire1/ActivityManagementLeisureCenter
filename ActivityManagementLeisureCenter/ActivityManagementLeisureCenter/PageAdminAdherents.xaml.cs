@@ -34,9 +34,66 @@ namespace ActivityManagementLeisureCenter
             lvAdherents.ItemsSource = SingletonBD.getInstance().getListeAdherents();
         }
 
-        private void SupprimerAdherent_Click(object sender, RoutedEventArgs e)
+        private async void SupprimerAdherent_Click(object sender, RoutedEventArgs e)
         {
+            var button = (Button)sender;
+            var idAdherent = button.Tag.ToString();
 
+            var dialog = new ContentDialog
+            {
+                Title = "Confirmation de suppression",
+                Content = new TextBlock { Text = "Êtes-vous sûr de vouloir supprimer cet adhérent ?" },
+                PrimaryButtonText = "Oui",
+                CloseButtonText = "Non"
+            };
+
+            dialog.XamlRoot = this.XamlRoot;
+
+            ContentDialogResult result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                try
+                {
+                    var success = SingletonBD.getInstance().SupprimerAdherent(idAdherent);
+
+                    if (success)
+                    {
+                        var successDialog = new ContentDialog
+                        {
+                            Title = "Suppression réussie",
+                            Content = new TextBlock { Text = "L'adhérent a été supprimé avec succès." },
+                            PrimaryButtonText = "OK"
+                        };
+                        successDialog.XamlRoot = this.XamlRoot;
+                        await successDialog.ShowAsync();
+
+                        chargerAdherents();
+                    }
+                    else
+                    {
+                        var errorDialog = new ContentDialog
+                        {
+                            Title = "Erreur",
+                            Content = new TextBlock { Text = "Une erreur est survenue lors de la suppression de l'adhérent." },
+                            PrimaryButtonText = "OK"
+                        };
+                        errorDialog.XamlRoot = this.XamlRoot;
+                        await errorDialog.ShowAsync();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var exceptionDialog = new ContentDialog
+                    {
+                        Title = "Erreur inattendue",
+                        Content = new TextBlock { Text = $"Une erreur est survenue : {ex.Message}" },
+                        PrimaryButtonText = "OK"
+                    };
+                    exceptionDialog.XamlRoot = this.XamlRoot;
+                    await exceptionDialog.ShowAsync();
+                }
+            }
         }
 
         private void ModifierAdherent_Click(object sender, RoutedEventArgs e)
