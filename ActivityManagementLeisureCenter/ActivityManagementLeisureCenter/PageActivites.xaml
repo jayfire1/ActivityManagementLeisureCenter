@@ -18,7 +18,9 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <ItemsControl Name="ActivitesList">
+            <TextBlock Name="BienvenueTextBlock" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 20, 0, 0"/>
+
+            <ItemsControl Name="ActivitesList" Margin="0, 60, 0, 0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapGrid Orientation="Horizontal" ItemWidth="315" ItemHeight="315" HorizontalAlignment="Center" />

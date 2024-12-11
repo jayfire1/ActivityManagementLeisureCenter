@@ -46,5 +46,15 @@ namespace ActivityManagementLeisureCenter
             Frame.Navigate(typeof(PageSeances), activite);
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (!string.IsNullOrEmpty(SessionManager.UtilisateurConnecte) && SessionManager.EstAdministrateur == false)
+            {
+                BienvenueTextBlock.Text = $"Bienvenue {SessionManager.UtilisateurConnecte}";
+            }
+        }
+
     }
 }
