@@ -15,14 +15,14 @@ namespace ActivityManagementLeisureCenter
     {
         private MySqlConnection con;
         private ObservableCollection<Activites> listeActivites;
-        private ObservableCollection<Seances> listeSeances;
+        private ObservableCollection<Seances> listeSeancesActvite;
         private static SingletonBD instance = null;
 
         public SingletonBD()
         {
             con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2024_420-345-ri_eq10;Uid=2361208;Pwd=2361208;");
             listeActivites = new ObservableCollection<Activites>();
-            listeSeances = new ObservableCollection<Seances>();
+            listeSeancesActvite = new ObservableCollection<Seances>();
         }
 
         public static SingletonBD getInstance()
@@ -40,7 +40,7 @@ namespace ActivityManagementLeisureCenter
 
         public ObservableCollection<Seances> getListeSeances()
         {
-            return listeSeances;
+            return listeSeancesActvite;
         }
 
         // Méthode pour aller chercher toutes les activitées
@@ -139,10 +139,43 @@ namespace ActivityManagementLeisureCenter
             return activitesList;
         }
 
+        // Méthode pour aller chercher tout les séances pour l'affichage côté administrateur
+        public ObservableCollection<Seances> getListeSeancesAdmin()
+        {
+            ObservableCollection<Seances> seancesList = new ObservableCollection<Seances>();
+
+            con.Open();
+
+            string query = "SELECT Date_debut, Date_fin, Heure_debut, Heure_fin, Nb_places, Nb_personnes, Id_activite, Id_seance FROM seance";
+            MySqlCommand commande = new MySqlCommand(query, con);
+
+            using(MySqlDataReader reader = commande.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Seances seance = new Seances(
+                        reader.GetDateTime("Date_debut"),
+                        reader.GetDateTime("Date_fin"),
+                        reader.GetTimeSpan("Heure_debut"),
+                        reader.GetTimeSpan("Heure_fin"),
+                        reader.GetInt32("Nb_places"),
+                        reader.GetInt32("Nb_personnes"),
+                        reader.GetInt32("Id_activite"),
+                        reader.GetInt32("Id_seance")
+                    );
+                    seancesList.Add(seance);
+                }
+                reader.Close();
+            }
+            con.Close();
+
+            return seancesList;
+        }
+
         // Méthode pour aller chercher toutes les séances correspondantes à l'activité choisit
         public void ChargerSeancesParActivite(int idActivite)
         {
-            listeSeances.Clear();
+            listeSeancesActvite.Clear();
 
             string requete = "SELECT * FROM seance WHERE id_activite = @idActivite";
             con.Open();
@@ -159,9 +192,10 @@ namespace ActivityManagementLeisureCenter
                 TimeSpan heureFin = reader.GetTimeSpan("heure_fin");
                 int nbPlaces = reader.GetInt32("nb_places");
                 int nbPersonnes = reader.GetInt32("nb_personnes");
+                int id_seance = reader.GetInt32("id_seance");
 
-                Seances seance = new Seances(dateDebut, dateFin, heureDebut, heureFin, nbPlaces, nbPersonnes, idActivite);
-                listeSeances.Add(seance);
+                Seances seance = new Seances(dateDebut, dateFin, heureDebut, heureFin, nbPlaces, nbPersonnes, idActivite, id_seance);
+                listeSeancesActvite.Add(seance);
             }
             reader.Close();
             con.Close();
@@ -393,6 +427,7 @@ namespace ActivityManagementLeisureCenter
             }
         }
 
+        // Méthode pour supprimer une activité
         public bool SupprimerActivite(int idActivite)
         {
             try
@@ -401,6 +436,27 @@ namespace ActivityManagementLeisureCenter
                 con.Open();
                 MySqlCommand commande = new MySqlCommand(requete, con);
                 commande.Parameters.AddWithValue("@idActivite", idActivite);
+                commande.ExecuteNonQuery();
+                con.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                con.Close();
+                return false;
+            }
+        }
+  
+
+        // Méthode pour supprimer une séance
+        public bool SupprimerSeance(int idSeance)
+        {
+            try
+            {
+                string requete = "CALL supprimer_seance(@idSeance)";
+                con.Open();
+                MySqlCommand commande = new MySqlCommand(requete, con);
+                commande.Parameters.AddWithValue("@idSeance", idSeance);
                 commande.ExecuteNonQuery();
                 con.Close();
                 return true;

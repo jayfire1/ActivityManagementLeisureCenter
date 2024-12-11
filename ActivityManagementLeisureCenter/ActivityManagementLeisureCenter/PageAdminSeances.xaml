@@ -8,7 +8,52 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock Text="Admin - Séances" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,0,0" FontSize="20" />
-    </Grid>
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Admin - Séances" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,0,0" FontSize="20" Grid.Row="0"/>
+            <local:BoutonPersonnalise HorizontalAlignment="Center" Content="Ajouter" Click="AjouterSeance_Click" Margin="0, 70, 0, 0" Width="300" Background="CornflowerBlue" Foreground="White"/>
+
+            <ListView x:Name="lvSeances" Grid.Row="1" Margin="0,20,0,0" FontSize="20" HorizontalAlignment="Center">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="16" Margin="10" VerticalAlignment="Center">
+                                <Run Text="{Binding Id_seance}" />
+                                <Run Text=" |" />
+                            </TextBlock>
+                            <TextBlock FontSize="16" VerticalAlignment="Center">
+                                <Run Text="{Binding DateDebutFormat}" />
+                                <Run Text=" - " />
+                                <Run Text="{Binding Heure_debut}" />
+                                <Run Text=" / " />
+                                <Run Text="{Binding DateFinFormat}" />
+                                <Run Text=" - " />
+                                <Run Text="{Binding Heure_fin}" />
+                                <Run Text=" | " />
+                            </TextBlock>
+                            <TextBlock FontSize="16" Margin="5" VerticalAlignment="Center">
+                                <Run Text="{Binding NbPlacesTotal}" />
+                                <Run Text=" | " />
+                            </TextBlock>
+                            <TextBlock FontSize="16" Margin="5, 0, 0, 0" VerticalAlignment="Center">
+                                <Run Text="{Binding NbPlaceRestantes}" />
+                                <Run Text=" | " />
+                            </TextBlock>
+                            <TextBlock FontSize="16" Margin="10" VerticalAlignment="Center">
+                                <Run Text="Activté #" />
+                                <Run Text="{Binding Id_activite}" />
+                            </TextBlock>
+                            <local:BoutonPersonnalise Content="Modifier" Click="ModifierSeance_Click" Margin="0, 0, 15, 0" Background="CornflowerBlue" Foreground="White"/>
+                            <local:BoutonPersonnalise Content="Supprimer" Click="SupprimerSeance_Click" Tag="{Binding Id_seance}" Background="#F44336" Foreground="White"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ScrollViewer>
 </Page>

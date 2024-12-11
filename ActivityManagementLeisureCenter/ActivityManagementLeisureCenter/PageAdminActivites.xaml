@@ -32,7 +32,7 @@
                             </TextBlock>
                             <TextBlock FontSize="16" Margin="5" VerticalAlignment="Center">
                                 <Run Text="{Binding Type}" />
-                                <Run Text=" - " />
+                                <Run Text=" | " />
                             </TextBlock>
                             <TextBlock FontSize="16" Margin="5, 0, 0, 0" VerticalAlignment="Center">
                                 <Run Text="{Binding Cout_organisation}" />

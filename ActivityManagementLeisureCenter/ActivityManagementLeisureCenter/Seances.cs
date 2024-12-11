@@ -10,14 +10,14 @@ namespace ActivityManagementLeisureCenter
     {
         DateTime date_debut, date_fin;
         TimeSpan heure_debut, heure_fin;
-        int nb_places, nb_personnes, id_activite;
+        int nb_places, nb_personnes, id_activite, id_seance;
 
         public Seances ()
         {
 
         }
 
-        public Seances(DateTime date_debut, DateTime date_fin, TimeSpan heure_debut, TimeSpan heure_fin, int nb_places, int nb_personnes, int id_activite)
+        public Seances(DateTime date_debut, DateTime date_fin, TimeSpan heure_debut, TimeSpan heure_fin, int nb_places, int nb_personnes, int id_activite, int id_seance)
         {
             Date_debut = date_debut;
             Date_fin = date_fin;
@@ -26,6 +26,7 @@ namespace ActivityManagementLeisureCenter
             Nb_places = nb_places;
             Nb_personnes = nb_personnes;
             Id_activite = id_activite;
+            Id_seance = id_seance;
         }
 
         public DateTime Date_debut { get => date_debut; set => date_debut = value; }
@@ -35,6 +36,7 @@ namespace ActivityManagementLeisureCenter
         public int Nb_places { get => nb_places; set => nb_places = value; }
         public int Nb_personnes { get => nb_personnes; set => nb_personnes = value; }
         public int Id_activite { get => id_activite; set => id_activite = value; }
+        public int Id_seance { get => id_seance; set => id_seance = value; }
 
         public string DateDebutFormat => Date_debut.ToString("yyyy-MM-dd");
         public string DateFinFormat => Date_fin.ToString("yyyy-MM-dd");
