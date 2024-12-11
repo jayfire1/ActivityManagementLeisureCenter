@@ -98,12 +98,15 @@ namespace ActivityManagementLeisureCenter
 
         private void ModifierSeance_Click(object sender, RoutedEventArgs e)
         {
+            var button = (Button)sender;
+            var seance = (Seances)button.DataContext;
 
+            Frame.Navigate(typeof(PageSeanceModification), seance);
         }
 
         private void AjouterSeance_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(PageSeanceFormulaire));
         }
 
 

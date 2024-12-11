@@ -98,12 +98,15 @@ namespace ActivityManagementLeisureCenter
 
         private void ModifierActivite_Click(object sender, RoutedEventArgs e)
         {
+            var button = (Button)sender;
+            var activite = (Activites)button.DataContext;
 
+            Frame.Navigate(typeof(PageActiviteModification), activite);
         }
 
         private void AjouterActivite_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(PageActiviteFormulaire));
         }
 
     }

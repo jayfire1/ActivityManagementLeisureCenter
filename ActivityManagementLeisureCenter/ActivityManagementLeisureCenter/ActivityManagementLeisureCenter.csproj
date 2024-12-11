@@ -12,6 +12,8 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="PageActiviteFormulaire.xaml" />
+    <None Remove="PageActiviteModification.xaml" />
     <None Remove="PageActivites.xaml" />
     <None Remove="PageAdherentFormulaire.xaml" />
     <None Remove="PageAdherentModification.xaml" />
@@ -21,6 +23,8 @@
     <None Remove="PageAdminSeances.xaml" />
     <None Remove="PageConnexion.xaml" />
     <None Remove="PageExportation.xaml" />
+    <None Remove="PageSeanceFormulaire.xaml" />
+    <None Remove="PageSeanceModification.xaml" />
     <None Remove="PageSeances.xaml" />
     <None Remove="PageStatistiques.xaml" />
   </ItemGroup>
@@ -49,6 +53,26 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="PageSeanceModification.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="PageSeanceFormulaire.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="PageActiviteModification.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="PageActiviteFormulaire.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="PageAdherentModification.xaml">

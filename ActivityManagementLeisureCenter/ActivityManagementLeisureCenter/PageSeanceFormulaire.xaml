@@ -1,0 +1,63 @@
+<Page
+    x:Class="ActivityManagementLeisureCenter.PageSeanceFormulaire"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ActivityManagementLeisureCenter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Ajouter une Séance" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" Margin="0,20,0,30"/>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,10">
+                <TextBlock x:Name="DateDebutErrorText" Foreground="Red" Margin="0,0,0,5"/>
+                <TextBox x:Name="DateDebutTextBox" PlaceholderText="Date de début (YYYY/MM/DD)" Width="450"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,10">
+                <TextBlock x:Name="DateFinErrorText" Foreground="Red" Margin="0,0,0,5"/>
+                <TextBox x:Name="DateFinTextBox" PlaceholderText="Date de fin (YYYY/MM/DD)" Width="450"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,10">
+                <TextBlock x:Name="HeureDebutErrorText" Foreground="Red" Margin="0,0,0,5"/>
+                <TextBox x:Name="HeureDebutTextBox" PlaceholderText="Heure de début (HH:mm:ss)" Width="450"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,10">
+                <TextBlock x:Name="HeureFinErrorText" Foreground="Red" Margin="0,0,0,5"/>
+                <TextBox x:Name="HeureFinTextBox" PlaceholderText="Heure de fin (HH:mm:ss)" Width="450"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,10">
+                <TextBlock x:Name="ActiviteErrorText" Foreground="Red" Margin="0,0,0,5"/>
+                <ComboBox x:Name="ActiviteComboBox" Width="450">
+                    
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,10">
+                <TextBlock x:Name="NbPlacesErrorText" Foreground="Red" Margin="0,0,0,5"/>
+                <TextBox x:Name="NbPlacesTextBox" PlaceholderText="Nombre de places" Width="450"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,10">
+                <TextBlock x:Name="NbPersonnesErrorText" Foreground="Red" Margin="0,0,0,5"/>
+                <TextBox x:Name="NbPersonnesTextBox" PlaceholderText="Nombre de personnes" Width="450"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="0,10,0,10">
+                <Button Content="Ajouter" Click="AjouterSeance_Click" Width="300" Background="CornflowerBlue" Foreground="White"/>
+                <Button Content="Revenir à la liste" Click="Revenir_Click" Width="300" Background="LightGray" Foreground="Black"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

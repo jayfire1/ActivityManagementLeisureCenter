@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -487,6 +488,62 @@ namespace ActivityManagementLeisureCenter
             catch (Exception ex)
             {
                 Console.WriteLine("Erreur lors de l'ajout de l'adhérent : " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        // Méthode pour ajouter une activité
+        public bool AjouterActivite(string nom, string type, decimal cout_organisation, decimal prix_vente, string image)
+        {
+            try
+            {
+                string requete = "INSERT INTO activite (Nom, Type, Cout_organisation, Prix_vente, Image) VALUES (@nom, @type, @cout_organisation, @prix_vente, @image)";
+                con.Open();
+                MySqlCommand commande = new MySqlCommand(requete, con);
+                commande.Parameters.AddWithValue("@nom", nom);
+                commande.Parameters.AddWithValue("@type", type);
+                commande.Parameters.AddWithValue("@cout_organisation", cout_organisation);
+                commande.Parameters.AddWithValue("@prix_vente", prix_vente);
+                commande.Parameters.AddWithValue("@image", image);
+                commande.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur lors de l'ajout de l'activité : " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        // Méthode pour ajouter une séance
+        public bool AjouterSeance(DateTime dateDebut, TimeSpan heureDebut, DateTime dateFin, TimeSpan heureFin, int nbPlaces, int nbPersonnes, int idActivite)
+        {
+            try
+            {
+                string requete = "INSERT INTO seance (date_debut, heure_debut, date_fin, heure_fin, nb_places, nb_personnes, id_activite) VALUES (@dateDebut, @heureDebut, @dateFin, @heureFin, @nbPlaces, @nbPersonnes, @idActivite)";
+                con.Open();
+                MySqlCommand commande = new MySqlCommand(requete, con);
+                commande.Parameters.AddWithValue("@dateDebut", dateDebut);
+                commande.Parameters.AddWithValue("@heureDebut", heureDebut);
+                commande.Parameters.AddWithValue("@dateFin", dateFin);
+                commande.Parameters.AddWithValue("@heureFin", heureFin);
+                commande.Parameters.AddWithValue("@nbPlaces", nbPlaces);
+                commande.Parameters.AddWithValue("@nbPersonnes", nbPersonnes);
+                commande.Parameters.AddWithValue("@idActivite", idActivite);
+                commande.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur lors de l'ajout de la séance : " + ex.Message);
                 return false;
             }
             finally
