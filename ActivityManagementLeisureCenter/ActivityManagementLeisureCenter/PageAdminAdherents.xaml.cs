@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -98,13 +99,26 @@ namespace ActivityManagementLeisureCenter
 
         private void ModifierAdherent_Click(object sender, RoutedEventArgs e)
         {
+            var button = (Button)sender;
+            var adherent = (Adherents)button.DataContext;
 
+            Frame.Navigate(typeof(PageAdherentModification), adherent);
         }
 
-        private void AjouterAdherent_Click(Object sender, RoutedEventArgs e)
+        private void AjouterAdherent_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(PageAdherentFormulaire));
         }
+
+
+
+
+
+
+
+
+
+
 
 
     }

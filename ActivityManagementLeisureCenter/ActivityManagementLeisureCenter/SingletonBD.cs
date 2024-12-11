@@ -468,5 +468,32 @@ namespace ActivityManagementLeisureCenter
             }
         }
 
+        // Méthode pour ajouter un adhérent
+        public bool AjouterAdherent(string nom, string prenom, string adresse, DateTime dateNaissance, int age)
+        {
+            try
+            {
+                string requete = "INSERT INTO adherent (Nom, Prenom, Adresse, Date_naissance, Age) VALUES (@nom, @prenom, @adresse, @dateNaissance, @age)";
+                con.Open();
+                MySqlCommand commande = new MySqlCommand(requete, con);
+                commande.Parameters.AddWithValue("@nom", nom);
+                commande.Parameters.AddWithValue("@prenom", prenom);
+                commande.Parameters.AddWithValue("@adresse", adresse);
+                commande.Parameters.AddWithValue("@dateNaissance", dateNaissance);
+                commande.Parameters.AddWithValue("@age", age);
+                commande.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur lors de l'ajout de l'adhérent : " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
     }
 }
