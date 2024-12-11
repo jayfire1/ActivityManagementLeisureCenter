@@ -64,6 +64,7 @@ namespace ActivityManagementLeisureCenter
                         // Mettre à jour l'état de connexion
                         SessionManager.EstConnecte = true;
                         SessionManager.UtilisateurConnecte = $"{adherent.Prenom} {adherent.Nom}";
+                        SessionManager.UtilisateurId = adherent.Id_num;
 
                         var mainWindow = App.MainWindowInstance;
                         mainWindow.UpdateMenuItemsVisibility();

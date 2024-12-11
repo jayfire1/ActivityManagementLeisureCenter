@@ -30,7 +30,7 @@
 
                                     <TextBlock Text="{Binding NbPlacesTotal}" FontSize="16" FontWeight="Medium" HorizontalAlignment="Center" Foreground="#FF9800"/>
 
-                                    <local:BoutonPersonnalise Content="Participer" Margin="0,20,0,0" HorizontalAlignment="Center" Padding="10" Background="#4CAF50" Foreground="White" CornerRadius="8" Width="150" Click="OnParticiperClick"/>
+                                    <local:BoutonPersonnalise Content="Participer" Margin="0,20,0,0" HorizontalAlignment="Center" Padding="10" Background="#4CAF50" Foreground="White" CornerRadius="8" Width="150" Click="OnParticiperClick" Visibility="{Binding IsAdherentVisible}"/>
                                 </StackPanel>
                             </Border>
                         </Grid>

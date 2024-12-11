@@ -13,5 +13,7 @@ namespace ActivityManagementLeisureCenter
         public static string UtilisateurConnecte { get; set; } = String.Empty;
 
         public static bool EstAdministrateur { get; set; } = false;
+
+        public static string UtilisateurId { get; set; } = String.Empty;
     }
 }

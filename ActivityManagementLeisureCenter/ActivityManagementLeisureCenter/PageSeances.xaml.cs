@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -46,9 +47,41 @@ namespace ActivityManagementLeisureCenter
             SeancesList.ItemsSource = singletonBD.getListeSeances();
         }
 
-        private void OnParticiperClick(object sender, RoutedEventArgs e)
+        private async void OnParticiperClick(object sender, RoutedEventArgs e)
         {
+            // Vérifier si l'utilisateur est connecté
+            if (!SessionManager.EstConnecte)
+            {
+                var dialog = new ContentDialog
+                {
+                    Title = "Non connecté",
+                    Content = "Vous devez être connecté pour participer à une séance.",
+                    CloseButtonText = "Ok"
+                };
+                await dialog.ShowAsync();
+                return;
+            }
 
+            var seance = (Seances)((Button)sender).DataContext;
+            string idAdherent = SessionManager.UtilisateurId;
+
+            SingletonBD singletonBD = SingletonBD.getInstance();
+            bool inscriptionReussie = singletonBD.InscrireAdherent(idAdherent, seance.Id_seance);
+
+            if (inscriptionReussie)
+            {
+                Frame.Navigate(typeof(PageActivites));
+            }
+            else
+            {
+                var dialog = new ContentDialog
+                {
+                    Title = "Erreur",
+                    Content = "L'inscription a échoué. Veuillez réessayer.",
+                    CloseButtonText = "Ok"
+                };
+                await dialog.ShowAsync();
+            }
         }
 
     }

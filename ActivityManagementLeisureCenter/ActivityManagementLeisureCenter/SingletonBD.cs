@@ -552,5 +552,31 @@ namespace ActivityManagementLeisureCenter
             }
         }
 
+        // Méthode pour inscrire un adhérent à une séance
+        public bool InscrireAdherent(string idNum, int idSeance)
+        {
+            try
+            {
+                con.Open();
+                string query = "INSERT INTO inscrit (id_num, id_seance) VALUES (@idNum, @idSeance)";
+                using (var commande = new MySqlCommand(query, con))
+                {
+                    commande.Parameters.AddWithValue("@idNum", idNum);
+                    commande.Parameters.AddWithValue("@idSeance", idSeance);
+                    commande.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
     }
 }

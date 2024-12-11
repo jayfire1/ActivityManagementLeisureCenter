@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,9 @@ namespace ActivityManagementLeisureCenter
         DateTime date_debut, date_fin;
         TimeSpan heure_debut, heure_fin;
         int nb_places, nb_personnes, id_activite, id_seance;
+
+        private string isAdherentVisible = "Collapsed";
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Seances ()
         {
@@ -45,5 +49,21 @@ namespace ActivityManagementLeisureCenter
         public string HeureAffichage => $"De {heure_debut} à {heure_fin}";
         public string NbPlaceRestantes => $"Nombre de places restantes : {Nb_places - nb_personnes}";
         public string NbPlacesTotal => $"Capacité : {nb_places}";
+        public string IsAdherentVisible
+        {
+            get
+            {
+                if (SessionManager.EstConnecte && !SessionManager.EstAdministrateur)
+                {
+                    return "Visible";
+                }
+                return "Collapsed";
+            }
+        }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
